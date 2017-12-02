@@ -1,7 +1,7 @@
 var util = require("../util");
 
-function User(id, socket) {
-    this.id = id;
+function User(socket) {
+    this.id = "jack";
     this.socket = socket;
     this.roomId = false;
 }
