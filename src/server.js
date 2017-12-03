@@ -13,7 +13,7 @@ function Server() {
 
     app.use(express.static(path.join(__dirname, '../web')));
 
-    var config = loadConfig("../config/config.json");
+    var config = loadConfig(path.join(__dirname, "../config/config.json"));
     var chatRoomCollection = new ChatRoomCollection();
     var userManager = new UserManager(chatRoomCollection);
     

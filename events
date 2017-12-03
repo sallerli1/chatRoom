@@ -1,0 +1,39 @@
+socket.emit("exception", exceptions['ROOM_NOT_EXIST']);
+
+//socket.to(roomId).emit("joined", user.getId());
+
+//socket.to(room).emit("left", user.getId());
+
+//user.getSocket().to(user.getRoomId()).emit("id changed", oldId, id);
+
+//user.getSocket().to(user.getRoomId()).emit("message", message);
+
+//user.getSocket().broadcast.emit("room added", roomId);
+
+
+socket.on("message", function(message) {
+        socket.broadcast.to(user.getRoomId()).emit("message", user.getId(), message);
+    });
+
+    socket.on("join", function(roomId) {
+        _that.joinChatRoom(user, roomId);
+    });
+
+    socket.on("leave", function(roomId) {
+        _that.leaveChatRoom(user, roomId);
+    });
+
+    socket.on("change id", function(id) {
+        _that.changeId(user, id);
+    });
+
+    socket.on("add room", function(roomId) {
+        _that.addChatRoom(user, roomId);
+    });
+
+    socket.on("disconnect", function() {
+        _that.leaveChatRoom(user, user.getRoomId());
+    });
+
+    socket.emit("change id");
+    socket.emit("rooms", roomArr);

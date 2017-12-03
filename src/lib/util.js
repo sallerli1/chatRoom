@@ -1,5 +1,9 @@
 function isTypeOf(o, type) {
-    return Object.prototype.toString.call(o) ==="[object "+type+"]";
+    if (Object.prototype.toString.call(type) === "[object String]") {
+        return Object.prototype.toString.call(o) ==="[object "+type+"]";
+    } else {
+        return o instanceof type;
+    }
 }
 
 function inheritPrototype(sub, sup) {

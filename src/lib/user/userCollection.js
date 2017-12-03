@@ -38,7 +38,7 @@ function UserCollection(arr) {
         return false;
     }
 
-    if (util.isTypeOf(arr, "Array")) {
+    if (util.isTypeOf(arr, Array)) {
         users = users.concat(arr);
         this.length = arr.length;
     }

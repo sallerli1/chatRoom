@@ -44,7 +44,7 @@ function ChatRoomCollection(arr) {
         return false;
     };
 
-    if (util.isTypeOf(arr, "Array")) {
+    if (util.isTypeOf(arr, Array)) {
         chatRooms = chatRooms.concat(arr);
         this.length = arr.length;
     }

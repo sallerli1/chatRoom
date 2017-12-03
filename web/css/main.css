@@ -91,6 +91,27 @@
     position: relative;
 }
 
+.add {
+    width: auto;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    cursor: pointer;
+    height: 30px;
+    background-color: #ff4677;
+    font-size: 1em;
+}
+
+.add:hover {
+    color: #ffffff;
+}
+
+.add:active {
+    background-color: #fd2a62
+}
+
 .room.selected::before{
     content: "";
     border: 5px solid transparent;
@@ -108,8 +129,14 @@
     
 }
 
+.messageBlock.self {
+    flex-flow: row-reverse;
+    align-self: flex-end;
+    text-align: right;
+}
+
 .message {
-    margin: 0;
+    margin: 8px 15px;
     flex: 5;
 }
 
@@ -117,4 +144,6 @@
     width: 30%;
     flex: 1;
     display: flex;
+    font-size: 1.5em;
+    color: #0044ff;
 }

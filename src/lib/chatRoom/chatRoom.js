@@ -3,7 +3,7 @@ var UserCollection = require("../user/userCollection");
 
 function ChatRoom(id, userCollection) {
     this.id = id;
-    if (!util.isTypeOf(userCollection, "UserCollection")) {
+    if (!util.isTypeOf(userCollection, UserCollection)) {
         this.userCollection = new UserCollection();
     } else {
         this.userCollection = userCollection;
