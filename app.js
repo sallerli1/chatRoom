@@ -1,5 +1,6 @@
-var app = require("express")();
+var Server = require("./src/server");
 
-var http = require("http").Server(app);
+var server = new Server();
 
-http.listen(3000);
+server.init();
+server.run();

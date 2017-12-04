@@ -1,7 +1,8 @@
 var util = require("../util");
 
-function UserCollection() {
+function UserCollection(arr) {
     var users = new Array();
+    this.length = 0;
 
     this.getUser = function(id) {
         for (var user of users) {
@@ -17,16 +18,28 @@ function UserCollection() {
     };
 
     this.add = function(user) {
-        return users.push(user);
+        if (users.push(user)) {
+            this.length++;
+            return true;
+        }
+
+        return false;
     };
 
     this.remove = function(id) {
-        for (var user of user) {
+        for (var user of users) {
             if (id === user.getId()) {
-                return delete user;
+                delete user
+                this.length--;
+                return true;
             }
         }
         return false;
+    }
+
+    if (util.isTypeOf(arr, Array)) {
+        users = users.concat(arr);
+        this.length = arr.length;
     }
 }
 
