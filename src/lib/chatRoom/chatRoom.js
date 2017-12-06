@@ -1,5 +1,6 @@
-var util = require("../util");
-var UserCollection = require("../user/userCollection");
+var util = require("../util"),
+    UserCollection = require("../user/userCollection"),
+    User = require("../user/user");
 
 function ChatRoom(id, userCollection) {
     this.id = id;
@@ -27,7 +28,7 @@ ChatRoom.prototype.getUserCount = function() {
 }
 
 ChatRoom.prototype.join = function(user) {
-    if (!util.isTypeOf(user, "User")) {
+    if (!util.isTypeOf(user, User)) {
         throw new TypeError();
     }
 

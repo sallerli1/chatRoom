@@ -27,12 +27,11 @@ function UserCollection(arr) {
     };
 
     this.remove = function(id) {
-        for (var user of user) {
+        for (var user of users) {
             if (id === user.getId()) {
-                if (delete user) {
-                    this.length--;
-                    return true;
-                }
+                delete user
+                this.length--;
+                return true;
             }
         }
         return false;

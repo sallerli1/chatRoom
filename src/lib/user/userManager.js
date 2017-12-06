@@ -54,12 +54,13 @@ UserManager.prototype.leaveChatRoom = function(user, roomId) {
     }
 
     chatRoom.leave(user.getId());
-    user.getSocket().leave();
+    socket.to(roomId).emit("left", user.getId());
+    user.getSocket().leave(roomId);
     user.changeRoom(false);
     socket.emit("success", success['LEAVE'], {
         roomId: roomId
     });
-    socket.to(room).emit("left", user.getId());
+
     return true;
 
 }
@@ -72,6 +73,9 @@ UserManager.prototype.changeChatRoom = function(user, roomId) {
 UserManager.prototype.addChatRoom = function(user, roomId) {
     this.chatRoomCollection.add(roomId);
     user.getSocket().broadcast.emit("room added", roomId);
+    user.getSocket().emit("success", success['ADD_ROOM'], {
+        roomId: roomId
+    });
 }
 
 UserManager.prototype.sendMessage = function(user, message) {
@@ -80,7 +84,8 @@ UserManager.prototype.sendMessage = function(user, message) {
         return;
     }
 
-    user.getSocket().to(user.getRoomId()).emit("message", message);
+    user.getSocket().to(user.getRoomId()).emit("message", user.getId(), message, false);
+    user.getSocket().emit("message", user.getId(), message, true);
 }
 
 UserManager.prototype.initUser = function(user) {
@@ -98,7 +103,7 @@ UserManager.prototype.initUser = function(user) {
     }
 
     socket.on("message", function(message) {
-        socket.broadcast.to(user.getRoomId()).emit("message", user.getId(), message);
+        _that.sendMessage(user, message);
     });
 
     socket.on("join", function(roomId) {

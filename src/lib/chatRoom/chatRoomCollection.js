@@ -11,7 +11,7 @@ function ChatRoomCollection(arr) {
             return chatRooms[index] || false;
         } else if (util.isTypeOf(index, "String")) {
             for (var room of chatRooms) {
-                if (room === index) {
+                if (room.id === index) {
                     return room;
                 }
             }

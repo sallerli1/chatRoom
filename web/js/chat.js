@@ -60,15 +60,10 @@ var chat = {
             add = app.querySelector(".rooms .add"),
             rooms = app.querySelectorAll(".rooms .room");
 
-        rooms.forEach(function (room, index) {
-            room.addEventListener("click", function (event) {
-                _that.join(_that.roomId, room.dataset.room.id);
-            }, false);
-        });
-
         send.addEventListener("click", function (event) {
             var message = input.value;
             _that.sendMessage(message);
+            input.value = "";
         }, false);
 
         add.addEventListener("click", function (event) {
@@ -84,11 +79,16 @@ var chat = {
             add = app.querySelector(".rooms .add"),
             rooms = app.querySelector(".rooms");
 
-        this.client.socket.on("message", function (message) {
-            _that.view.appendMessage(display, message);
+        this.client.socket.on("message", function (id, message, self) {
+            _that.view.appendMessage(display, id, message, self);
         });
 
         this.client.socket.on("rooms", function (roomArr) {
+
+            rooms.parentElement.appendChild(add)
+            _that.view.empty(rooms);
+            rooms.appendChild(add);
+
             for (var roomId of roomArr) {
                 _that.view.addChatRoom(rooms, roomId);
             }
@@ -145,6 +145,10 @@ var chat = {
             room.dataset.room = id;
             room.innerHTML = "<span>" + id + "</span>";
 
+            room.addEventListener("click", function (event) {
+                chat.join(room.dataset.room, chat.roomId);
+            }, false);
+
             rooms.appendChild(room);
             rooms.appendChild(add);
         },
@@ -157,25 +161,33 @@ var chat = {
                 return;
             }
 
-            selected.classList.remove("selected");
+            if (selected instanceof HTMLLIElement) {
+                selected.classList.remove("selected");
+            }
+            
             toSelect.classList.add("selected");
             var info = "There are " + num + "users in this chat room";
             this.empty(mesDisplay);
             this.appendInfo(mesDisplay, info);
         },
 
-        appendMessage: function (mesDisplay, message, self) {
+        appendMessage: function (mesDisplay, id, message, self) {
             var messageBlock = document.createElement("div");
+            messageBlock.classList.add("messageBlock");
             messageBlock.innerHTML = ['<div class="userName">',
-                '<span>saller</span>',
+                '<span>',
+                id,
+                '</span>',
                 '</div>',
                 '<p class="message">',
                 message,
-                '</p>'].join();
+                '</p>'].join("");
 
             if (self) {
-                mesDisplay.classList.add("self");
+                messageBlock.classList.add("self");
             }
+
+            mesDisplay.appendChild(messageBlock);
         },
 
         appendInfo: function (mesDisplay, info) {
