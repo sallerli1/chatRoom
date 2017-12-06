@@ -1,52 +1,37 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <link rel="stylesheet" type="text/css" href="css/main.css" />
-</head>
+    <head>
+        <meta http-equiv="ContentType" content="text/html;charset=utf-8" />
+        <title>Chat</title>
+        <link rel="stylesheet" type="text/css" href="css/main.css"/>
+    </head>
 
-<body>
-    <div id="wrapper">
-        <div style="height:1px"></div>
-        <div id="chat-room">
-            <div class="mesFrame">
-                <div class="mesDisplay">
-                    <div class="messageBlock">
-                        <div class="userName">
-                            <span>saller</span>
-                        </div>
-                        <p class="message">dsfasdfasdfasdf</p>
+    <body>
+        <div id="wrapper">
+            <div style="height:1px"></div>
+            <div id="chat-room">
+                <div class="mesFrame">
+                    <div class="mesDisplay">
+                        <span class="hint">please join a chat room</span>
                     </div>
-                    <div class="messageBlock self">
-                        <div class="userName">
-                            <span>saller</span>
+                    <div class="mesSend">
+                        <textarea id="editer"></textarea>
+                        <div id="button">
+                            <span>SEND</span>
                         </div>
-                        <p class="message">dsfasdfasdfasdf</p>
                     </div>
                 </div>
-                <div class="mesSend">
-                    <textarea id="editer"></textarea>
-                    <div id="button">
-                        <span>SEND</span>
-                    </div>
-                </div>
+                <ul class="rooms">
+                    <li class="add">
+                        <span>Add Chat Room</span>
+                    </li>
+                </ul>
             </div>
-            <ul class="rooms">
-                <!-- <li class="room" data-room-id="">
-                    <span>room1</span>
-                </li>
-                <li class="room selected" data-room-id="">
-                    <span>room1</span>
-                </li>-->
-                <li class="add">
-                    <span>Add Chat Room</span>
-                </li>
-            </ul>
         </div>
-    </div>
 
-    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
-    <script type="text/javascript" src="js/chat.js"></script>
-</body>
+        <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+        <script type="text/javascript" src="js/chat.js"></script>
+    </body>
 
 </html>

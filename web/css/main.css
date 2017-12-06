@@ -25,7 +25,9 @@
     flex-flow: column;
 }
 
-
+.hint {
+    align-self: center;
+}
 
 .mesDisplay {
     height: 600px;
