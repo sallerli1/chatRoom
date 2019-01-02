@@ -13,7 +13,7 @@ function UserCollection(arr) {
         return false;
     };
 
-    this. getUsers = function() {
+    this.getUsers = function() {
         return users;
     };
 

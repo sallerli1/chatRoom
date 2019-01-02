@@ -1,6 +1,6 @@
-var Server = require("./src/server");
+var createServer = require("./src/server");
 
-var server = new Server();
+var server = createServer();
 
 server.init();
 server.run();
